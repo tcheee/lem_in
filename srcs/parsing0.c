@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:52:28 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/01 17:44:55 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/02 14:11:38 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		init_value(t_farm *farm, char **tab, int i)
 {
-	farm->room[i].name = ft_strdup(tab[0]); // to free
+	farm->room[i].name = ft_strdup(tab[0]);
 	farm->room[i].x = ft_atoi(tab[1]);
 	farm->room[i].y = ft_atoi(tab[2]);
 	farm->room[i].ant = 0;
@@ -79,15 +79,18 @@ int				is_room_info(char *str, t_farm *farm, int i)
 
 int				is_comment(char *str, t_farm *farm)
 {
-	if (str[0] == '#' && str[1] == '#')
+	if (str[0] == '#')
 	{
-		if (ft_strcmp(str, "##start") == 0 && farm->init_start == 0)
-			farm->init_start = 1;
-		else if (ft_strcmp(str, "##end") == 0 && farm->init_end == 0)
-			farm->init_end = 1;
-		else if ((ft_strcmp(str, "##start") == 0 && farm->init_start >= 1) ||
-				(ft_strcmp(str, "##end") == 0 && farm->init_end >= 1))
-			return (-1);
+		if (str[1] == '#')
+		{
+			if (ft_strcmp(str, "##start") == 0 && farm->init_start == 0)
+				farm->init_start = 1;
+			else if (ft_strcmp(str, "##end") == 0 && farm->init_end == 0)
+				farm->init_end = 1;
+			else if ((ft_strcmp(str, "##start") == 0 && farm->init_start >= 1)
+					|| (ft_strcmp(str, "##end") == 0 && farm->init_end >= 1))
+				return (-1);
+		}
 		return (1);
 	}
 	return (0);

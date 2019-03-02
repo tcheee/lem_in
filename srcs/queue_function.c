@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 16:48:44 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 15:15:17 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/02 12:31:42 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		check_enqueue(int *queue, int i, t_farm *farm)
 	int j;
 
 	j = 0;
-	while (j < farm->nb_room)
+	while (j < farm->nb_queue)
 	{
 		if (queue[j] == i)
 			return (0);

@@ -6,13 +6,21 @@
 /*   By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 14:52:38 by ayguillo          #+#    #+#             */
-/*   Updated: 2018/11/08 12:13:14 by ayguillo         ###   ########.fr       */
+/*   Updated: 2019/03/02 14:03:49 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int c)
+int		ft_isdigit(char *str)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 14:05:44 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 15:49:53 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/02 14:08:39 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int				check_name(char *name, t_farm *farm, int nb)
 	i = 0;
 	while (i < nb && farm->room[i].name)
 	{
-		if (ft_strcmp(name, farm->room[i].name) == 0)
+		if (ft_strcmp(farm->room[i].name, name) == 0)
 			return (1);
 		i++;
 	}
@@ -44,17 +44,18 @@ int				check_valid_start_end(t_farm farm)
 {
 	if (farm.init_start == 2 && farm.init_end == 2)
 		return (1);
-	free_farm(&farm);
 	return (-1);
 }
 
 int				invalid_farm(char *line, t_farm *farm)
 {
 	free_farm(farm);
-	ft_printf("line error = %s\n", line); // to delete
-	ft_printf("The farm is not valid!\n");
+	ft_printf("\nERROR.\n");
 	if (line != NULL)
+	{
+		ft_printf("The farm is not valid because of line: %s !\n", line);
 		ft_strdel(&line);
+	}
 	return (-1);
 }
 

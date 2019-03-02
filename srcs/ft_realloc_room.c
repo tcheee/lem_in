@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 15:42:22 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 15:14:52 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/02 14:59:00 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_realloc_room(t_farm farm, int old_nb_room)
 		tmp[j] = farm.room[j];
 		j++;
 	}
-	free(farm.room);
+	//free(farm.room);
 	farm.room = tmp;
 	return (0);
 }

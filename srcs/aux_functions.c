@@ -1,21 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   aux_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 16:23:44 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/01 22:19:06 by tcherret         ###   ########.fr       */
+/*   Created: 2019/03/02 10:51:22 by tcherret          #+#    #+#             */
+/*   Updated: 2019/03/02 13:32:47 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(const char *s1, const char *s2)
+#include "../includes/lem_in.h"
+
+int		find_start(t_farm *farm)
 {
 	int i;
+	int start;
 
 	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+	while (farm->room[i].start != 1)
 		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	start = i;
+	return (start);
+}
+
+int		find_end(t_farm *farm)
+{
+	int i;
+	int end;
+
+	i = 0;
+	while (farm->room[i].end != 1)
+		i++;
+	end = i;
+	return (end);
+}
+
+int		undefined_map(void)
+{
+	ft_printf("ERROR.\n");
+	return (-1);
 }

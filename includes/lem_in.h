@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 22:31:09 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/01 20:20:23 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/02 13:33:00 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct		s_farm
 	int		path_max;
 	int		ant_name;
 	int		counter;
+	int		flow;
+	int		nb_queue;
 }					t_farm;
 
 /*
@@ -85,6 +87,9 @@ void				free_farm(t_farm *farm);
 void				free_tab(char **tab);
 int					invalid_farm(char *line, t_farm *farm);
 int					valid_farm(t_farm *farm);
+int					find_start(t_farm *farm);
+int					find_end(t_farm *farm);
+int					undefined_map(void);
 
 /*
 ** Algorithms to find the shortests paths and manage the flow
@@ -96,6 +101,8 @@ int					dequeue(int **queue, t_farm *farm);
 int					is_empty(t_farm *farm);
 void				put_vertex_visited(int ind, t_farm *farm);
 int					check_enqueue(int *queue, int i, t_farm *farm);
+void				create_path(int **path, int *queue, t_farm *farm, int nb);
+int					path_found(t_farm *farm, int **queue, int end, int vertex);
 
 /*
 ** Functions to move the ants, to check the room and to display
@@ -105,5 +112,6 @@ int					moving_display(t_farm *farm);
 int					move_ant(t_room *src, t_room *dst, t_farm *farm);
 int					check_room_free(t_room *room);
 int					graph_finished(t_farm *farm);
+void				print_path(int *path, int nb);
 
 #endif

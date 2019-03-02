@@ -6,23 +6,27 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:09:26 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/01 20:20:31 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/02 15:06:11 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+#include <stdlib.h>
 
 static void		find_path_max(t_farm *farm)
 {
 	int i;
 
 	ft_printf("\n");
-	while (farm->room[farm->count].start != 1)
-		farm->count++;
-	i = -1;
-	while (++i < farm->nb_room)
+	farm->count = find_start(farm);
+	i = 0;
+	while (i < farm->nb_room)
+	{
 		if (farm->link[farm->count][i] == 1)
 			farm->path_max++;
+		i++;
+	}
 }
 
 static void		init_farm(t_farm *farm, int *i, char **line)
@@ -44,7 +48,9 @@ static void		init_farm(t_farm *farm, int *i, char **line)
 	farm->counter = 0;
 	farm->optionp = 0;
 	farm->optionc = 0;
-	if (!(farm->room = malloc(sizeof(t_room) * SIZE)))
+	farm->flow = 0;
+	farm->nb_queue = 0;
+	if (!(farm->room = malloc(sizeof(t_room) * (SIZE * 2))))
 		return ;
 }
 
@@ -66,7 +72,7 @@ static int		initialization_matrix(t_farm *farm)
 static int		do_the_work(t_farm *farm, int *i, char **line)
 {
 	ft_printf("%s\n", *line);
-	if (is_nb_info(*line) == 1 && ft_atoi(*line) > 0 && farm->init_total == 0)
+	if (farm->init_total == 0 && is_nb_info(*line) == 1 && ft_atoi(*line) > 0)
 	{
 		farm->total = ft_atoi(*line);
 		farm->init_total = 1;
@@ -83,10 +89,10 @@ static int		do_the_work(t_farm *farm, int *i, char **line)
 			if (initialization_matrix(farm) == -1)
 				return (-1);
 		if (create_link_matrix(farm, *line) == -1)
-			return (invalid_farm(NULL, farm));
+			return (-1);
 	}
 	else if (is_comment(*line, farm) != 1)
-		return (invalid_farm(*line, farm));
+		return (-1);
 	ft_strdel(line);
 	return (0);
 }
@@ -102,7 +108,7 @@ int				main(int ac, char **av)
 		get_option(ac, av, &farm);
 	while (get_next_line(0, &line) > 0)
 		if (do_the_work(&farm, &i, &line) == -1)
-			return (invalid_farm(NULL, &farm));
+			return (invalid_farm(line, &farm));
 	if (check_valid_start_end(farm) == -1)
 		return (invalid_farm(NULL, &farm));
 	find_path_max(&farm);
@@ -112,7 +118,6 @@ int				main(int ac, char **av)
 		farm.nb_path++;
 	if (farm.nb_path == 0)
 		return (invalid_farm(NULL, &farm));
-	moving_display(&farm); //moving ants and display function
-	//system("leaks lem_in"); // to delete
+	moving_display(&farm);
 	return (valid_farm(&farm));
 }

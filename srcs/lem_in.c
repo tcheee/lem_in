@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:09:26 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/01 11:05:04 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/01 20:20:31 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ static void		init_farm(t_farm *farm, int *i, char **line)
 	farm->nb_path = 0;
 	farm->count = 0;
 	farm->path_max = 0;
+	farm->ant_name = 1;
+	farm->counter = 0;
+	farm->optionp = 0;
+	farm->optionc = 0;
 	if (!(farm->room = malloc(sizeof(t_room) * SIZE)))
 		return ;
 }
@@ -95,7 +99,7 @@ int				main(int ac, char **av)
 
 	init_farm(&farm, &i, &line);
 	if (ac > 1)
-		get_option(ac, av, farm);
+		get_option(ac, av, &farm);
 	while (get_next_line(0, &line) > 0)
 		if (do_the_work(&farm, &i, &line) == -1)
 			return (invalid_farm(NULL, &farm));
@@ -108,7 +112,7 @@ int				main(int ac, char **av)
 		farm.nb_path++;
 	if (farm.nb_path == 0)
 		return (invalid_farm(NULL, &farm));
-	//moving_ant(&farm); //moving ants and display function
+	moving_display(&farm); //moving ants and display function
 	//system("leaks lem_in"); // to delete
 	return (valid_farm(&farm));
 }

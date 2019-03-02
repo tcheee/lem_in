@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:52:28 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 15:41:51 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/01 17:44:55 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void		init_value(t_farm *farm, char **tab, int i)
 	farm->room[i].ant = 0;
 	farm->room[i].visited = 0;
 	farm->room[i].weight = 0;
+	farm->room[i].ant_name = 0;
 }
 
 static int		give_value_farm(t_farm *farm, char **tab, int i)

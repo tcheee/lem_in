@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 22:31:09 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 16:03:41 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/01 20:20:23 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_room
 	int		end;
 	int		visited;
 	int		weight;
+	int		ant_name;
 }					t_room;
 
 typedef struct		s_path
@@ -54,12 +55,14 @@ typedef struct		s_farm
 	int		init_total;
 	int		create_matrix;
 	int		size;
-	int		optionv;
+	int		optionp;
 	int		optionc;
 	int		first;
 	int		last;
 	int		count;
 	int		path_max;
+	int		ant_name;
+	int		counter;
 }					t_farm;
 
 /*
@@ -76,7 +79,7 @@ void				fill_the_matrix(t_farm *farm);
 int					is_comment(char *str, t_farm *farm);
 void				free_tab(char **tab);
 int					check_name(char *name, t_farm *farm, int nb);
-void				get_option(int ac, char **av, t_farm farm);
+void				get_option(int ac, char **av, t_farm *farm);
 int					check_valid_start_end(t_farm farm);
 void				free_farm(t_farm *farm);
 void				free_tab(char **tab);
@@ -98,7 +101,8 @@ int					check_enqueue(int *queue, int i, t_farm *farm);
 ** Functions to move the ants, to check the room and to display
 */
 
-int					move_ant(t_room *src, t_room *dst);
+int					moving_display(t_farm *farm);
+int					move_ant(t_room *src, t_room *dst, t_farm *farm);
 int					check_room_free(t_room *room);
 int					graph_finished(t_farm *farm);
 

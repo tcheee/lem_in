@@ -6,7 +6,7 @@
 #    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
-#    Updated: 2019/03/01 15:13:06 by tcherret         ###   ########.fr        #
+#    Updated: 2019/03/01 19:12:49 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAMELIB = ./libft/libftprintf.a
 
 CC = @gcc
 
-CFLAGS =-Wall -Wextra -Werror -g
+CFLAGS =-Wall -Wextra -Werror -g ##-fsanitize=address -fsanitize=undefined
 
 SRCS = srcs/lem_in.c\
 	   srcs/parsing0.c\
@@ -28,7 +28,7 @@ SRCS = srcs/lem_in.c\
 	   srcs/queue_function.c\
 	   srcs/ant_function.c\
 	   srcs/free_functions.c\
-
+	   srcs/moving_display.c\
 
 INCS = lem_in.h
 

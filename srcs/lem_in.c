@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:09:26 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/03 11:13:24 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/03 12:45:11 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,10 @@ static int		do_the_work(t_farm *farm, int *i, char **line)
 			return (-1);
 	}
 	else if (is_comment(*line, farm) != 1)
+	{
+		ft_strdel(line);
 		return (-1);
+	}
 	ft_strdel(line);
 	return (0);
 }

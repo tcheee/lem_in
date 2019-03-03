@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:52:28 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/02 14:11:38 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/03 10:40:04 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int				is_room_info(char *str, t_farm *farm, int i)
 	char	**tab;
 	int		j;
 
-	if (i == (*farm).size - 1)
-		if (ft_realloc_room(*farm, i) == -1)
+	if (i == farm->size - 1)
+		if (ft_realloc_room(farm, i) == -1)
 			return (-1);
 	j = 0;
 	tab = ft_strsplit(str, ' ');

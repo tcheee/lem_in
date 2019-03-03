@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 17:02:40 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/02 20:28:40 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/02 22:03:56 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int				moving_display(t_farm *farm) //implement a dispatcher for the ants
 			while (j < farm->nb_path)
 			{
 				e--;
-						ft_printf("\ne = %d and the weight of the path test is %d\n", e, farm->path[j].weight);
+				//ft_printf("\ne = %d and the weight of the path test is %d\n", e, farm->path[j].weight);
 				if (e >= farm->path[j].weight)
 				{
 					k = 0;

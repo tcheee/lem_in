@@ -6,7 +6,7 @@
 #    By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 09:51:31 by ayguillo          #+#    #+#              #
-#    Updated: 2019/01/14 19:41:13 by tcherret         ###   ########.fr        #
+#    Updated: 2019/03/02 22:12:36 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,6 @@ SRC = ft_atoi.c \
 	  ft_strcdup.c \
 	  ft_sqrt.c \
 	  ft_pwd.c \
-	  ft_gnl.c \
 	  ft_print_words_tables.c \
 	  ft_lstdelcontent.c \
 	  ft_lstclearifdata.c \

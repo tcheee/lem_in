@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:09:26 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/03 15:34:29 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/03 15:42:53 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int		do_the_work(t_farm *farm, int *i, char **line)
 	}
 	else if (is_comment(*line, farm) != 1)
 		return (-1);
-	//ft_strdel(line);
+	ft_strdel(line);
 	return (0);
 }
 
@@ -109,14 +109,8 @@ int				main(int ac, char **av)
 	if (ac > 1)
 		get_option(ac, av, &farm);
 	while (get_next_line(0, &line) > 0)
-	{
 		if (do_the_work(&farm, &i, &line) == -1)
-		{
-			ft_strdel(&line);
-			return (invalid_farm(NULL, &farm));
-		}
-		ft_strdel(&line);
-	}
+			return (invalid_farm(&line, &farm));
 	ft_strdel(&line);
 	if (check_valid_start_end(farm) == -1)
 		return (invalid_farm(NULL, &farm));

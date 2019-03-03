@@ -6,7 +6,7 @@
 #    By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 09:51:31 by ayguillo          #+#    #+#              #
-#    Updated: 2019/01/14 19:41:13 by tcherret         ###   ########.fr        #
+#    Updated: 2019/03/03 15:41:32 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,9 +91,6 @@ SRC = ft_atoi.c \
 	  ft_lstlen.c \
 	  ft_lstclear.c \
 	  ft_str_joinfree.c \
-	  get_next_line.c \
-	  ft_realloc \
-	  ft_strlen_nofault \
 
 OBJ = $(SRC:.c=.o)
 

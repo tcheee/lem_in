@@ -6,7 +6,7 @@
 #    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
-#    Updated: 2019/03/03 10:33:01 by tcherret         ###   ########.fr        #
+#    Updated: 2019/03/03 11:22:29 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAMELIB = ./libft/libftprintf.a
 
 CC = @gcc
 
-CFLAGS =-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS =-Wall -Wextra -Werror -g
 
 SRCS = srcs/lem_in.c\
 	   srcs/parsing0.c\

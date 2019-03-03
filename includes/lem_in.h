@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 22:31:09 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/03 12:27:34 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/03 15:07:40 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void				get_option(int ac, char **av, t_farm *farm);
 int					check_valid_start_end(t_farm farm);
 void				free_farm(t_farm *farm);
 void				free_tab(char **tab);
-int					invalid_farm(char *line, t_farm *farm);
+int					invalid_farm(char **line, t_farm *farm);
 int					valid_farm(t_farm *farm);
 int					find_start(t_farm *farm);
 int					find_end(t_farm *farm);

@@ -3,62 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/02 22:10:37 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/03 12:51:23 by tcherret         ###   ########.fr       */
+/*   Created: 2018/11/15 11:20:11 by lbarthon          #+#    #+#             */
+/*   Updated: 2019/01/14 19:37:36 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "libft.h"
+#include <stdlib.h>
+#include <string.h>
 
-int				ft_verify(char **str, char **line)
+void	move(void **ptr)
 {
-	char *newline;
-	char *tmp;
+	char	*tmp;
+	char	*str;
 
-	while ((newline = ft_strchr(*str, '\n')))
-	{
-		*line = ft_strndup(*str, (newline - *str));
-		tmp = ft_strdup(newline + 1);
-		free(*str);
-		*str = tmp;
-		return (1);
-	}
-	if (**str)
-	{
-		*line = ft_strdup(*str);
-		ft_bzero(*str, ft_strlen(*str));
-		return (1);
-	}
-	return (0);
+	str = (char*)*ptr;
+	tmp = ft_strdup(ft_strchr(str, '\n') + 1);
+	free(*ptr);
+	*ptr = tmp;
 }
 
-int				get_next_line(const int fd, char **line)
+t_list	*get_actual_list(t_list **list, int fd)
 {
-	static char	*str[MAX_FD];
-	char		buff[BUFF_SIZE + 1];
-	char		*tmp;
-	int			jebaited;
+	t_list	*tempo;
 
-	if (fd < 0 || BUFF_SIZE <= 0 || (read(fd, buff, 0) < 0) || \
-		(jebaited = CHAR_BYTE) < 0)
-		return (-1);
-	while ((jebaited = read(fd, buff, BUFF_SIZE)) != 0)
+	tempo = *list;
+	while (tempo)
 	{
-		buff[jebaited] = '\0';
-		if (!str[fd])
-			str[fd] = ft_strdup(buff);
-		else
-		{
-			tmp = ft_strjoin(str[fd], buff);
-			free(str[fd]);
-			str[fd] = tmp;
-		}
+		if ((int)tempo->content_size == fd)
+			return (tempo);
+		tempo = tempo->next;
 	}
-	if (str[fd] == 0 || str[fd][0] == '\0')
+	tempo = ft_lstnew(NULL, fd);
+	tempo->content_size = fd;
+	ft_lstadd(list, tempo);
+	tempo = *list;
+	return (tempo);
+}
+
+int		get_next_line(const int fd, char **line)
+{
+	static t_list	*list;
+	char			buff[BUFF_SIZE + 1];
+	int				r;
+	int				i;
+	t_list			*actual;
+
+	if (fd < 0 || !line || read(fd, buff, 0) < 0)
+		return (-1);
+	actual = get_actual_list(&list, fd);
+	while ((r = read(fd, buff, BUFF_SIZE)))
+	{
+		buff[r] = '\0';
+		i = ft_strlen_nofault(actual->content);
+		if (!(actual->content = ft_realloc(actual->content, i, i + BUFF_SIZE)))
+			return (-1);
+		actual->content = ft_strcat(actual->content, buff);
+		if (ft_strchr(actual->content, '\n'))
+			break ;
+	}
+	if (r < BUFF_SIZE && !ft_strlen(actual->content))
 		return (0);
-	if (ft_strlen(str[fd]) > 0)
-		return (ft_verify(&str[fd], line));
-	return (0);
+	*line = ft_strcdup(actual->content, '\n');
+	(ft_strchr(actual->content, '\n')) ?
+		(move(&actual->content)) : ft_strclr(actual->content);
+	return (1);
 }

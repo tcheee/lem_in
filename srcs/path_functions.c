@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 10:39:20 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/02 11:04:54 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/03 17:07:10 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int			path_found(t_farm *farm, int **queue, int end, int vertex)
 	create_path(&farm->path[farm->nb_path].path,
 			*queue, farm, farm->room[end].weight);
 	farm->path[farm->nb_path].weight = farm->room[end].weight;
+	farm->path[farm->nb_path].ants_send = 0;
 	if (farm->optionp == 1)
 	{
 		ft_printf("The weight is %d and the path is: ", farm->room[end].weight);

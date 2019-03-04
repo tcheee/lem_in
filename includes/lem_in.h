@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 22:31:09 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/03 15:07:40 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/03 17:59:15 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct		s_path
 {
 	int		*path;
 	int		weight;
+	int		ants_send;
 }					t_path;
 
 typedef struct		s_farm

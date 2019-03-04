@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:09:26 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/03 15:42:53 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/03 16:06:24 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void		init_farm(t_farm *farm, int *i, char **line)
 	*line = NULL;
 	farm->room = NULL;
 	farm->path = NULL;
+	farm->link = NULL;
 	farm->init_total = 0;
 	farm->init_start = 0;
 	farm->init_end = 0;
@@ -89,9 +90,7 @@ static int		do_the_work(t_farm *farm, int *i, char **line)
 			if (initialization_matrix(farm) == -1)
 				return (-1);
 		if (create_link_matrix(farm, *line) == -1)
-		{
 			return (-1);
-		}
 	}
 	else if (is_comment(*line, farm) != 1)
 		return (-1);

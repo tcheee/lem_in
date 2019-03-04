@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 15:39:14 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/03 15:09:42 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/03 16:06:02 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ void		free_farm(t_farm *farm)
 		}
 		free(farm->path);
 	}
-	//free(farm->room);
-	//free(farm->path);
-	//free(farm->link);
 }
 
 void		free_tab(char **tab)

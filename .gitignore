@@ -3,6 +3,6 @@
 ._.*
 .DS*
 ._DS*
-*.dSYM
+*.dSYM*
 .nfs*
 *.a

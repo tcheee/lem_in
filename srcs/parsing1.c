@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:54:59 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/02 14:06:01 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/15 11:07:23 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int				is_nb_info(char *str)
 
 	j = 0;
 	tab = ft_strsplit(str, ' ');
+	if (tab[0] == NULL)
+		return (0);
 	while (tab[j] != NULL)
 		j++;
 	if (ft_isdigit(tab[0]) == 1)

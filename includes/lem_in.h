@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 22:31:09 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/03 17:59:15 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/15 16:49:41 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ typedef struct		s_path
 {
 	int		*path;
 	int		weight;
-	int		ants_send;
+	int		c_weight;
+	int		ants_to_send;
 }					t_path;
 
 typedef struct		s_farm
@@ -113,6 +114,6 @@ int					moving_display(t_farm *farm);
 int					move_ant(t_room *src, t_room *dst, t_farm *farm);
 int					check_room_free(t_room *room);
 int					graph_finished(t_farm *farm);
-void				print_path(int *path, int nb);
+void				print_path(int *path, int nb, t_farm *farm);
 
 #endif

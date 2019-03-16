@@ -6,13 +6,13 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 12:51:03 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/15 22:42:05 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/15 23:33:03 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-static void		reset_before_bfs(t_farm *farm)
+static void		reset_before_bfs(t_farm *farm, int **queue, int *end)
 {
 	int i;
 
@@ -21,12 +21,8 @@ static void		reset_before_bfs(t_farm *farm)
 		farm->room[i].visited = 0;
 	farm->first = -1;
 	farm->last = -1;
-}
-
-static void		initialization_bfs(t_farm *farm, int **queue, int *end)
-{
-	int i;
-
+	if (!(*queue = ft_memalloc(sizeof(int*) * farm->nb_room)))
+		return ;
 	farm->nb_queue = 0;
 	i = find_start(farm);
 	farm->room[i].weight = 1;
@@ -56,26 +52,17 @@ int				bfs(t_farm *farm)
 	int		i;
 	int		vertex;
 	int		end;
-	int		start;
 	int		check;
-	int		j;
 
-	reset_before_bfs(farm);
-	if (!(queue = ft_memalloc(sizeof(int*) * farm->nb_room)))
-		return (-1);
-	initialization_bfs(farm, &queue, &end);
-	start = find_start(farm);
+	reset_before_bfs(farm, &queue, &end);
 	while (!is_empty(farm))
 	{
 		prepare_loop(farm, &queue, &vertex, &i);
-		check = 0;
-		j = -1;
-		while (++j < farm->nb_room)
-			if (vertex != start && j != start && farm->link[vertex][j] == -1)
-				check = 1;
+		check = check_duplicate_path(farm, vertex);
 		while (++i < farm->nb_room)
 		{
-			if (check == 0 && farm->link[vertex][i] == 1 && farm->room[i].visited == 0)
+			if (check == 0 && farm->link[vertex][i] == 1
+					&& farm->room[i].visited == 0)
 			{
 				if (check_enqueue(queue, i, farm) == 1)
 					gain_space(farm, &queue, i, vertex);

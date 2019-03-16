@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 14:05:44 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/03 15:17:23 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/15 23:26:58 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ int				check_valid_start_end(t_farm farm)
 int				invalid_farm(char **line, t_farm *farm)
 {
 	free_farm(farm);
-	ft_printf("\nERROR.\n");
+	ft_printf(RED_TEXT "ERROR.\n" COLOR_RESET);
 	if (line != NULL)
-		ft_printf("The farm is not valid because of line: %s !\n", *line);
+		ft_printf(RED_TEXT "The farm is not valid because of line: %s !\n"
+				COLOR_RESET, *line);
 	ft_strdel(line);
 	return (-1);
 }

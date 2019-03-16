@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 16:48:44 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/15 21:12:47 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/15 23:11:24 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void	enqueue(int vertex, int **queue, t_farm *farm)
 {
-	//ft_printf("vertex = %d\n", vertex);
 	if (farm->last == farm->nb_room)
 	{
-		ft_printf("Queue Overflow\n");
+		ft_printf(RED_TEXT "Queue Overflow\n" COLOR_RESET);
 		exit(1);
 	}
 	else
@@ -35,7 +34,7 @@ int		dequeue(int **queue, t_farm *farm)
 
 	if (farm->first == -1 || farm->first > farm->last)
 	{
-		ft_printf("Queue Underflow\n");
+		ft_printf(RED_TEXT "Queue Underflow\n" COLOR_RESET);
 		exit(1);
 	}
 	delete_item = (*queue)[farm->first];

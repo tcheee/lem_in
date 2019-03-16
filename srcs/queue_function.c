@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 16:48:44 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/15 18:29:12 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/15 21:12:47 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	enqueue(int vertex, int **queue, t_farm *farm)
 {
-	ft_printf("vertex = %d\n", vertex);
-	if (farm->last == farm->nb_room - 1)
+	//ft_printf("vertex = %d\n", vertex);
+	if (farm->last == farm->nb_room)
 	{
 		ft_printf("Queue Overflow\n");
 		exit(1);

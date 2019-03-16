@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 12:51:03 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/15 18:26:16 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/15 22:42:05 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,26 @@ int				bfs(t_farm *farm)
 	int		i;
 	int		vertex;
 	int		end;
+	int		start;
+	int		check;
+	int		j;
 
 	reset_before_bfs(farm);
 	if (!(queue = ft_memalloc(sizeof(int*) * farm->nb_room)))
 		return (-1);
 	initialization_bfs(farm, &queue, &end);
+	start = find_start(farm);
 	while (!is_empty(farm))
 	{
 		prepare_loop(farm, &queue, &vertex, &i);
+		check = 0;
+		j = -1;
+		while (++j < farm->nb_room)
+			if (vertex != start && j != start && farm->link[vertex][j] == -1)
+				check = 1;
 		while (++i < farm->nb_room)
 		{
-			if (farm->link[vertex][i] == 1 && farm->room[i].visited == 0)
+			if (check == 0 && farm->link[vertex][i] == 1 && farm->room[i].visited == 0)
 			{
 				if (check_enqueue(queue, i, farm) == 1)
 					gain_space(farm, &queue, i, vertex);

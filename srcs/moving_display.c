@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 17:02:40 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/15 17:54:23 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/15 22:46:59 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void			do_the_math(t_farm *farm)
 			farm->path[k].ants_to_send++;
 			total--;
 			k++;
-			if (index < farm->nb_path - 1 && (farm->path[index].ants_to_send + farm->path[index].c_weight >= farm->path[index + 1].c_weight))
+			if (index < farm->nb_path - 1 && (farm->path[index].ants_to_send + farm->path[index].c_weight >farm->path[index + 1].c_weight))
 				index++;
 		}
 	}
@@ -63,7 +63,7 @@ int					moving_display(t_farm *farm)
 				if (farm->room[farm->path[k].path[j - 1]].ant == 1)
 				{
 					move_ant(&farm->room[farm->path[k].path[j - 1]], &farm->room[farm->path[k].path[j]], farm);
-					ft_printf("WTFL%d-%s ", farm->room[farm->path[k].path[j]].ant_name, farm->room[farm->path[k].path[j]].name);
+					ft_printf("L%d-%s ", farm->room[farm->path[k].path[j]].ant_name, farm->room[farm->path[k].path[j]].name);
 				}
 				j--;
 			}

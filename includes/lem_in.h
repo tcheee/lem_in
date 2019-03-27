@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 22:31:09 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/03 17:59:15 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/15 23:26:38 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 # include <stdlib.h>
 # include <unistd.h>
 # define SIZE 256
+# define COLOR_RESET	"\033[0m"
+# define BOLD			"\033[1m"
+# define BLACK_TEXT		"\033[30;1m"
+# define RED_TEXT		"\033[31;1m"
+# define GREEN_TEXT		"\033[32;1m"
+# define YELLOW_TEXT	"\033[33;1m"
+# define BLUE_TEXT		"\033[34;1m"
+# define MAGENTA_TEXT	"\033[35;1m"
+# define CYAN_TEXT		"\033[36;1m"
+# define WHITE_TEXT		"\033[37;1m"
 
 /*
 ** Data structures to stock the information
@@ -40,7 +50,8 @@ typedef struct		s_path
 {
 	int		*path;
 	int		weight;
-	int		ants_send;
+	int		c_weight;
+	int		ants_to_send;
 }					t_path;
 
 typedef struct		s_farm
@@ -104,6 +115,7 @@ void				put_vertex_visited(int ind, t_farm *farm);
 int					check_enqueue(int *queue, int i, t_farm *farm);
 void				create_path(int **path, int *queue, t_farm *farm, int nb);
 int					path_found(t_farm *farm, int **queue, int end, int vertex);
+int					check_duplicate_path(t_farm *farm, int vertex);
 
 /*
 ** Functions to move the ants, to check the room and to display
@@ -113,6 +125,6 @@ int					moving_display(t_farm *farm);
 int					move_ant(t_room *src, t_room *dst, t_farm *farm);
 int					check_room_free(t_room *room);
 int					graph_finished(t_farm *farm);
-void				print_path(int *path, int nb);
+void				print_path(int *path, int nb, t_farm *farm);
 
 #endif

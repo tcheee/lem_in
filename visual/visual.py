@@ -1,82 +1,58 @@
-# import numpy as np
-# import matplotlib.pyplot as plt
-# import mpl_toolkits.mplot3d.axes3d as p3
-# import matplotlib.animation as animation
-#
-# # Fixing random state for reproducibility
-# np.random.seed(19680801)
-#
-#
-# def Gen_RandLine(length, dims=2):
-#     """
-#     Create a line using a random walk algorithm
-#
-#     length is the number of points for the line.
-#     dims is the number of dimensions the line has.
-#     """
-#     lineData = np.empty((dims, length))
-#     lineData[:, 0] = np.random.rand(dims)
-#     for index in range(1, length):
-#         # scaling the random numbers by 0.1 so
-#         # movement is small compared to position.
-#         # subtraction by 0.5 is to change the range to [-0.5, 0.5]
-#         # to allow a line to move backwards.
-#         step = ((np.random.rand(dims) - 0.5) * 0.1)
-#         lineData[:, index] = lineData[:, index - 1] + step
-#
-#     return lineData
-#
-#
-# def update_lines(num, dataLines, lines):
-#     for line, data in zip(lines, dataLines):
-#         # NOTE: there is no .set_data() for 3 dim data...
-#         line.set_data(data[0:2, :num])
-#         line.set_3d_properties(data[2, :num])
-#     return lines
-#
-# # Attaching 3D axis to the figure
-# fig = plt.figure()
-# ax = p3.Axes3D(fig)
-#
-# # Fifty lines of random 3-D lines
-# data = [Gen_RandLine(25, 3) for index in range(50)]
-#
-# # Creating fifty line objects.
-# # NOTE: Can't pass empty arrays into 3d version of plot()
-# lines = [ax.plot(dat[0, 0:1], dat[1, 0:1], dat[2, 0:1])[0] for dat in data]
-#
-# # Setting the axes properties
-# ax.set_xlim3d([0.0, 1.0])
-# ax.set_xlabel('X')
-#
-# ax.set_ylim3d([0.0, 1.0])
-# ax.set_ylabel('Y')
-#
-# ax.set_zlim3d([0.0, 1.0])
-# ax.set_zlabel('Z')
-#
-# ax.set_title('3D Test')
-#
-# # Creating the Animation object
-# line_ani = animation.FuncAnimation(fig, update_lines, 25, fargs=(data, lines),
-#                                    interval=50, blit=False)
-#
-# plt.show()
+#Clean version for now
 
-
+import re
+import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
+import seaborn as sns
 
-g = nx.Graph()
+def file_parsing(file_path):
+    cnt = 0
+    output_list = []
+    output_links = []
 
-g.add_node(2)
-g.add_node(5)
+    with open(file_path, 'r') as fp:
+        for line in fp:
+            cnt += 1
+            #checks for the room name and coordinates
+            if re.match('([^\s#]{1,10}) (\d+) (\d+)', line, re.MULTILINE):
+                output_list.append(line.strip().split(' '))
+            #checks for linking rooms
+            if re.search('^\w*([-])\w*', line, re.MULTILINE):
+                output_links.append(line.strip().split('-'))
+            #checks for start
+            if line.startswith('##start'):
+                output_list.append(next(fp, '').strip().split())
+            #checks for start
+            if line.startswith('##end'):
+                output_list.append(next(fp, '').strip().split())
+    room_name = [item[0] for item in output_list]
+    x_coord = [int(item[1]) for item in output_list]
+    y_coord = [int(item[2]) for item in output_list]
+    x_y = list(zip(x_coord, y_coord))
+    links_x = [item[0] for item in output_links]
+    links_y = [item[1] for item in output_links]
+    links = list(zip(links_x, links_y))
+    return (room_name, links, output_list, x_y)
 
-g.add_edge(2,5)
-g.add_edge(4,1)
+# def graph_all():
+rooms, links, room_coords, xpos_ypos = file_parsing('ex.txt')
+# print(start[0].split(' '))
+print("Room information: ", rooms)
+print("Room information: ", room_coords)
+print("X and Y position as tuple list: ", xpos_ypos)
+print("Links: ", links)
+G = nx.DiGraph()
+# testing = ['a2a', '1', '2', 'ahs6']
+G.add_edges_from(links)
+# G.add_node(name = 'a2a')
+# name = nx.get_node_attributes(G, 'name')
 
-g.add_edges_from([(2,5), (1,3)])
+fig = plt.figure(num=None, figsize=(390, 340), dpi=80)
+# fig = plt.figure()
+nx.draw(G, pos=nx.random_layout(G), node_size=1200, with_labels=True, edge_color='white')
+# fig.set_facecolor("#00000F")
+fig.savefig("test1.png", facecolor='black')
+# nx.draw_networkx(G, name)
 
-print (nx.info(g))
-nx.draw_networkx(g)
-plt.show()
+# plt.figure()

@@ -6,7 +6,7 @@
 /*   By: tcherret <tcherret@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 17:02:40 by tcherret          #+#    #+#             */
-/*   Updated: 2019/04/12 22:15:42 by ztisnes          ###   ########.fr       */
+/*   Updated: 2019/04/13 16:15:39 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int					moving_display(t_farm *farm)
 	while (graph_finished(farm) != 1)
 		do_the_algo(farm, used);
 	if (farm->optionc == 1)
-	ft_printf(GREEN_TEXT "\nNumber of turns : %d\n" COLOR_RESET,
+		ft_printf(GREEN_TEXT "\nNumber of turns : %d\n" COLOR_RESET,
 			farm->counter);
 	return (1);
 }

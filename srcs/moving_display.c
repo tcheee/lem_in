@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moving_ant.c                                       :+:      :+:    :+:   */
+/*   moving_display.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcherret <tcherret@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 17:02:40 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/15 23:57:01 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/04/12 22:15:42 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,7 @@ int					moving_display(t_farm *farm)
 
 	used = 0;
 	if (farm->optionp == 1)
-		ft_printf(MAGENTA_TEXT "The number of path is : %d\n\n"
-				COLOR_RESET, farm->nb_path);
+		ft_printf("The number of path is : %d\n\n", farm->nb_path);
 	start = find_start(farm);
 	do_the_math(farm);
 	while (used < farm->path_max && farm->path[used].ants_to_send > 0)
@@ -107,7 +106,7 @@ int					moving_display(t_farm *farm)
 	while (graph_finished(farm) != 1)
 		do_the_algo(farm, used);
 	if (farm->optionc == 1)
-		ft_printf(GREEN_TEXT "\nNumber of turns : %d\n" COLOR_RESET,
-				farm->counter);
+	ft_printf(GREEN_TEXT "\nNumber of turns : %d\n" COLOR_RESET,
+			farm->counter);
 	return (1);
 }

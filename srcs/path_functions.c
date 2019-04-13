@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcherret <tcherret@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 10:39:20 by tcherret          #+#    #+#             */
-/*   Updated: 2019/03/15 23:25:40 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/04/12 22:16:12 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int			path_found(t_farm *farm, int **queue, int end, int vertex)
 	if (farm->optionp == 1)
 	{
 		ft_printf(CYAN_TEXT "Path[%d] has a weight of %d and is: " COLOR_RESET,
-				farm->nb_path, farm->path[farm->nb_path].c_weight);
+						farm->nb_path, farm->path[farm->nb_path].c_weight);
 		print_path(farm->path[farm->nb_path].path,
 				farm->room[end].weight, farm);
 	}
